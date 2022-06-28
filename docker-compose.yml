@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=development
+      - MONGO_INITDB_DATABSE=test-db
+      - MONGO_INITDB_ROOT_USERNAME=test-user
+      - MONGO_INITDB_ROOT_PASSWORD=test-password
+  db:
+    image: mongo:5.0.5
+    environment:
+      - MONGO_INITDB_DATABSE=test-db
+      - MONGO_INITDB_ROOT_USERNAME=test-user
+      - MONGO_INITDB_ROOT_PASSWORD=test-password
